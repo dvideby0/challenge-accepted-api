@@ -12,4 +12,5 @@ app.get('/*', function(req, res) {
   res.status(200).json(response);
 });
 
-app.listen(9088);
+const port = process.env.PORT || 9088;
+app.listen(port);

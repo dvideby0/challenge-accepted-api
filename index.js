@@ -28,7 +28,7 @@ app.get('/*', function(req, res) {
   res.status(200).json(response);
 });
 
-app.post('/media', upload.array('data'), function(req, res) {
+app.post('/media', upload.any(), function(req, res) {
   var video = fs.createReadStream(__dirname + '/' + req.files[0].path);
   console.log('parsing video');
   const CREDENTIALS = readJson(`${__dirname}/credentials.json`);

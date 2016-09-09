@@ -9,6 +9,7 @@
   "author": "352inc <devops@352inc.com> (http://352inc.com/)",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "youtube-api": "^2.0.2"
   }
 }

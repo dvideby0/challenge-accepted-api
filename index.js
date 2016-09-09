@@ -70,8 +70,10 @@ app.post('/media', upload.any(), function(req, res) {
     }
   }, (err, data) => {
     if (err) {
+      console.log('error');
       res.status(500).json(err);
     } else {
+      console.log('success');
       res.status(200).json(response);
     }
   });

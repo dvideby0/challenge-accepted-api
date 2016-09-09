@@ -49,9 +49,9 @@ app.post('/media', upload.any(), function(req, res) {
   });
 
   var creds = {
-    access_token: "ya29.CjBZAxo1PuQwreoe7l013pIc7DYK0F-myT105eYpRX2xzvpEpNQBFx58ABMOm826i_I",
+    access_token: "ya29.CjBZAyB8xN9e3ofOJadanxIzj6xewWv67R68v8utLTf7-IQH7nGQanSc1Kcic6v8aXg",
     token_type: "Bearer",
-    expiry_date: 1473461029141
+    expiry_date: 1473464199323
   };
 
   oauth.setCredentials(creds);
@@ -83,6 +83,7 @@ app.post('/media', upload.any(), function(req, res) {
       res.status(500).json(err);
     } else {
       console.log('success');
+      console.log(JSON.stringify(data));
       res.status(200).json(response);
     }
   });

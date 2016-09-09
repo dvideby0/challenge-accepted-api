@@ -10,6 +10,7 @@
   "author": "352inc <devops@352inc.com> (http://352inc.com/)",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0"
   }
 }

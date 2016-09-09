@@ -81,7 +81,8 @@ app.post('/media', upload.single('video'), function(req, res) {
   // }, 250);
 });
 
-app.listen(9088);
+const port = process.env.PORT || 9088;
+app.listen(port);
 
 // YouTubeInitializer.bootstrap()
 //   .then(YouTube => {

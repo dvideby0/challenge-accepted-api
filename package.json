@@ -1,0 +1,14 @@
+{
+  "name": "ChallengeAcceptedAPI",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "352inc <devops@352inc.com> (http://352inc.com/)",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

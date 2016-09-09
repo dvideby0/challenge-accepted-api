@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "352inc <devops@352inc.com> (http://352inc.com/)",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "bluebird": "^3.4.6",
     "bug-killer": "^4.2.3",
     "express": "^4.14.0",

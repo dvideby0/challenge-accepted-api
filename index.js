@@ -1,12 +1,20 @@
 const express = require('express');
 const app = express();
-const YouTubeInitializer = require('./youtube');
+//const YouTubeInitializer = require('./youtube');
 const multer  = require('multer');
-var fs = require('fs');
+const Youtube = require("youtube-api"),
+  fs = require("fs"),
+  readJson = require("r-json"),
+  Lien = require("lien"),
+  Logger = require("bug-killer"),
+  opn = require("opn"),
+  prettyBytes = require("pretty-bytes");
+
 var path = require('path');
 var upload = multer({
   dest: './uploads'
 });
+
 
 const response = [
   {id: 1, name: 'challenge 1', youtube_id: 'jdYJf_ybyVo'},
@@ -21,8 +29,25 @@ app.get('/*', function(req, res) {
 });
 
 app.post('/media', upload.single('video'), function(req, res) {
-  var video = fs.createReadStream(req.file.path);
-  var youTubeUpload = YouTube.videos.insert({
+  var video = fs.createReadStream(__dirname + '/' + req.file.path);
+
+  const CREDENTIALS = readJson(`${__dirname}/credentials.json`);
+  var oauth = Youtube.authenticate({
+    type: "oauth",
+    client_id: CREDENTIALS.web.client_id,
+    client_secret: CREDENTIALS.web.client_secret,
+    redirect_url: CREDENTIALS.web.redirect_uris[0]
+  });
+
+  var creds = {
+    access_token: "ya29.Ci9ZAzzMq0ps_1T3-sp0pjGjBu61dum9oFOfi9sbDxJ33LdSiITeoF7tqZWeHoRCrw",
+    token_type: "Bearer",
+    expiry_date: 1473458341502
+  };
+
+  oauth.setCredentials(creds);
+
+  var youTubeUpload = Youtube.videos.insert({
     resource: {
       // Video title and description
       snippet: {
@@ -41,6 +66,7 @@ app.post('/media', upload.single('video'), function(req, res) {
     ,
     media: {
       body: video
+      //body: fs.createReadStream("video.m4v")
     }
   }, (err, data) => {
     if (err) {
@@ -55,8 +81,10 @@ app.post('/media', upload.single('video'), function(req, res) {
   // }, 250);
 });
 
-YouTubeInitializer.bootstrap()
-  .then(YouTube => {
-    global.YouTube = YouTube;
-    app.listen(9088);
-  });
+app.listen(9088);
+
+// YouTubeInitializer.bootstrap()
+//   .then(YouTube => {
+//     global.YouTube = YouTube;
+//     app.listen(9088);
+//   });

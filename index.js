@@ -3,6 +3,7 @@ const app = express();
 const crypto = require('crypto');
 //const YouTubeInitializer = require('./youtube');
 const multer  = require('multer');
+const mime = require('mime');
 const Youtube = require("youtube-api"),
   fs = require("fs"),
   readJson = require("r-json"),

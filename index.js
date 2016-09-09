@@ -40,9 +40,9 @@ app.post('/media', upload.any(), function(req, res) {
   });
 
   var creds = {
-    access_token: "ya29.Ci9ZAzzMq0ps_1T3-sp0pjGjBu61dum9oFOfi9sbDxJ33LdSiITeoF7tqZWeHoRCrw",
+    access_token: "ya29.CjBZAxo1PuQwreoe7l013pIc7DYK0F-myT105eYpRX2xzvpEpNQBFx58ABMOm826i_I",
     token_type: "Bearer",
-    expiry_date: 1473458341502
+    expiry_date: 1473461029141
   };
 
   oauth.setCredentials(creds);

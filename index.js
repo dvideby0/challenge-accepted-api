@@ -21,7 +21,6 @@ app.get('/*', function(req, res) {
 });
 
 app.post('/media', upload.single('video'), function(req, res) {
-  // TODO: Buffer req.file.path
   var video = fs.createReadStream(req.file.path);
   var youTubeUpload = YouTube.videos.insert({
     resource: {

@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-//const YouTubeInitializer = require('./youtube');
+const session = require('express-session');
+const passport = require('passport');
+const YouTubeV3Strategy = require('passport-youtube-v3').Strategy;
 const multer  = require('multer');
 const Youtube = require("youtube-api"),
   fs = require("fs"),
@@ -22,8 +24,45 @@ const response = [
   {id: 3, name: 'challenge 3', youtube_id: '7I6eI7hUruY'}
 ];
 
+app.use(session({ secret: 'Hackathon lolol' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/*', function(req, res) {
+// YouTube OAuth
+passport.use(new YouTubeV3Strategy({
+    clientID: '860173744538-b0aqlks6lpg6u1j1o1krree26j217qc3.apps.googleusercontent.com',
+    clientSecret: '80TX8Qlsyky2cTyG1zvZR7ut',
+    callbackURL: "http://localhost:9088/auth/youtube/callback",
+    scope: [ 'https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.upload']
+  },
+  function(accessToken, refreshToken, profile, done) {
+    return done(null, {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      profile: profile
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+app.get('/auth/youtube', passport.authenticate('youtube'));
+app.get('/auth/youtube/callback', passport.authenticate('youtube', {successRedirect: '/auth/youtube/success', failureRedirect: '/auth/youtube/error'}));
+app.get('/auth/youtube/success', function(req, res) {
+  console.log(req.user);
+  res.status(200).json(req.user);
+});
+app.get('/auth/youtube/error', function(req, res) {
+  res.status(401).json({message: 'OH NOES'});
+});
+
+app.get('/', function(req, res) {
   console.log('I was called');
   res.status(200).json(response);
 });
@@ -83,8 +122,10 @@ app.post('/media', upload.any(), function(req, res) {
   // }, 250);
 });
 
+
 const port = process.env.PORT || 9088;
 app.listen(port);
+console.log('App started on port ' + port);
 
 // YouTubeInitializer.bootstrap()
 //   .then(YouTube => {

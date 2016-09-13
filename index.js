@@ -79,9 +79,8 @@ app.post('/media', upload.any(), function(req, res) {
   });
 
   var creds = {
-    access_token: "ya29.Ci9ZAzzMq0ps_1T3-sp0pjGjBu61dum9oFOfi9sbDxJ33LdSiITeoF7tqZWeHoRCrw",
-    token_type: "Bearer",
-    expiry_date: 1473458341502
+    access_token: "ya29.Ci9aA57WYy2USKtxsbIezkCS-g13TwqiFmuTQwh1niN5Dff0X6HrSK75-jNaPgCUKg",
+    token_type: "Bearer"
   };
 
   oauth.setCredentials(creds);
@@ -90,7 +89,7 @@ app.post('/media', upload.any(), function(req, res) {
     resource: {
       // Video title and description
       snippet: {
-        title: "Testing YoutTube API NodeJS module",
+        title: "Testing YouTube API NodeJS module",
         description: "Test video upload via YouTube API"
       },
       status: {

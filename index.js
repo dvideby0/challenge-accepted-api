@@ -29,8 +29,7 @@ var upload = multer({storage: storage});
 const response = [
   {id: 1, name: 'Play Guitar', youtube_id: 'jdYJf_ybyVo'},
   {id: 2, name: 'Stutter', youtube_id: 'a8dUPENLs70'},
-  {id: 3, name: 'Have a Concert', youtube_id: '7I6eI7hUruY'},
-  {id: 4, name: 'Fail at Life', youtube_id: 'ijfvh_-bA8w'}
+  {id: 3, name: 'Have a Concert', youtube_id: '7I6eI7hUruY'}
 ];
 
 

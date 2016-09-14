@@ -83,11 +83,20 @@ mongoose.connection.on('connected', function(err) {
         });
     });
 
-    app.get('/videos/:challenge_id', function(req, res) {
+    app.get('/challenges/:challenge_id/videos', function(req, res) {
       Videos.find({challenge_id: req.params.challenge_id})
         .limit(20)
         .populate('created_by', '-email')
-        .then(function(videos){
+        .then(function(videos) {
+          res.status(200).json(videos);
+        });
+    });
+
+    app.get('users/:user_id/videos', function(req, res) {
+      Videos.find({created_by: req.params.user_id})
+        .limit(20)
+        .populate('created_by', '-email')
+        .then(function(videos) {
           res.status(200).json(videos);
         });
     });

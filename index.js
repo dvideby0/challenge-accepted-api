@@ -18,9 +18,9 @@ var upload = multer({
 });
 
 const response = [
-  {id: 1, name: 'challenge 1', youtube_id: 'jdYJf_ybyVo', profile_picture: 'http://www.american.edu/uploads/profiles/large/chris_palmer_profile_11.jpg', has_challenges: true},
+  {id: 1, name: 'challenge 1', youtube_id: 'jdYJf_ybyVo', profile_picture: 'https://upload.wikimedia.org/wikipedia/en/7/70/Shawn_Tok_Profile.jpg', has_challenges: true},
   {id: 2, name: 'Doing some crazy shit', youtube_id: 'a8dUPENLs70', profile_picture: 'https://upload.wikimedia.org/wikipedia/en/7/70/Shawn_Tok_Profile.jpg', has_challenges: true},
-  {id: 3, name: 'challenge 3', youtube_id: '7I6eI7hUruY', profile_picture: 'http://www.american.edu/uploads/profiles/large/chris_palmer_profile_11.jpg', has_challenges: false},
+  {id: 3, name: 'challenge 3', youtube_id: '7I6eI7hUruY', profile_picture: 'https://upload.wikimedia.org/wikipedia/en/7/70/Shawn_Tok_Profile.jpg', has_challenges: false},
   {id: 4, name: 'Fail at Life', youtube_id: 'ijfvh_-bA8w', profile_picture: 'https://upload.wikimedia.org/wikipedia/en/7/70/Shawn_Tok_Profile.jpg', has_challenges: true}
 ];
 

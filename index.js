@@ -85,6 +85,7 @@ mongoose.connection.on('connected', function(err) {
 
     app.get('/challenges/:challenge_id/videos', function(req, res) {
       Videos.find({challenge_id: req.params.challenge_id})
+        .sort({score: -1})
         .limit(20)
         .populate('created_by', '-email')
         .then(function(videos) {

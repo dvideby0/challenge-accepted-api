@@ -8,10 +8,7 @@ const multer = require('multer');
 const Youtube = require("youtube-api");
 const fs = require("fs");
 const readJson = require("r-json");
-const Lien = require("lien");
-const Logger = require("bug-killer");
 const opn = require("opn");
-const prettyBytes = require("pretty-bytes");
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const Users = require('./models/user');
@@ -157,20 +154,11 @@ mongoose.connection.on('connected', function(err) {
           res.status(200).json(response);
         }
       });
-
-      // setInterval(function () {
-      //   Logger.log(`${prettyBytes(req.req.connection._bytesDispatched)} bytes uploaded.`);
-      // }, 250);
     });
 
     const port = process.env.PORT || 9088;
     app.listen(port);
     console.log('App started on port ' + port);
 
-// YouTubeInitializer.bootstrap()
-//   .then(YouTube => {
-//     global.YouTube = YouTube;
-//     app.listen(9088);
-//   });
   }
 });

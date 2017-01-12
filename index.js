@@ -10,6 +10,7 @@ const fs = require("fs");
 const readJson = require("r-json");
 const Lien = require("lien");
 const Logger = require("bug-killer");
+const bodyParser = require('body-parser')
 const opn = require("opn");
 const prettyBytes = require("pretty-bytes");
 const mongoose = require('mongoose');
@@ -36,6 +37,7 @@ mongoose.connection.on('connected', function(err) {
     app.use(session({secret: 'Hackathon lolol'}));
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(bodyParser.json());
 
 // YouTube OAuth
     passport.use(new YouTubeV3Strategy({
@@ -74,12 +76,32 @@ mongoose.connection.on('connected', function(err) {
       res.status(401).json({message: 'OH NOES'});
     });
 
+    app.post('/login', function(req, res) {
+      Users.findOneAndUpdate({facebook_id: req.body.facebook_id}, {$set: req.body}, {upsert: true, new: true})
+        .then(user => {
+          res.status(200).json(user.toObject());
+        })
+        .catch(err => {
+          res.status(500).json({error: err});
+        });
+
+    });
     app.get('/challenges', function(req, res) {
       Challenges.find({})
         .populate('created_by', '-email')
         .limit(20)
         .then(function(challenges) {
           res.status(200).json(challenges);
+        });
+    });
+
+    app.post('/challenges', function(req, res) {
+      Challenges.insert({$set: req.body})
+        .then(function(challenge) {
+          res.status(200).json(challenge.toObject());
+        })
+        .catch(function(err) {
+          res.status(500).json({error: err});
         });
     });
 

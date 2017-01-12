@@ -5,11 +5,14 @@ var moment = require('moment');
 
 var challengeSchema = new mongoose.Schema({
   name: {type: String},
-  created_at: {type: Date},
   Description: {type: String},
   score: {type: Number},
   created_by: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   preview_img: {type: String}
+}, {
+  timestamps: {
+    createdAt: 'created_at'
+  }
 });
 
 module.exports = mongoose.model('Challenge', challengeSchema);

@@ -10,7 +10,7 @@ const fs = require("fs");
 const readJson = require("r-json");
 const Lien = require("lien");
 const Logger = require("bug-killer");
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const opn = require("opn");
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -95,7 +95,8 @@ mongoose.connection.on('connected', function(err) {
     });
 
     app.post('/challenges', function(req, res) {
-      Challenges.insert({$set: req.body})
+      var challenge = new Challenges(req.body);
+      challenge.save()
         .then(function(challenge) {
           res.status(200).json(challenge.toObject());
         })
